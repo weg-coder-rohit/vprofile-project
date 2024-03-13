@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'java-app'
+    static_configs:
+      - targets: ['vproapp:8081']  # Name of the service and port where your Java application is running

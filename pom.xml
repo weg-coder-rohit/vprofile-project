@@ -146,6 +146,12 @@
 	            <artifactId>amqp-client</artifactId>
 	            <version>4.0.2</version>
 	   </dependency>
+              <!-- prometeous -->
+       <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient</artifactId>
+            <version>0.11.0</version> <!-- Use the latest version -->
+        </dependency>
 	   <!-- Elasticsearch Dependency-->
 		<dependency>
 		    <groupId>org.elasticsearch</groupId>

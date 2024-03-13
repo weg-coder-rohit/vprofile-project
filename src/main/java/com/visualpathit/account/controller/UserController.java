@@ -10,6 +10,13 @@ import com.visualpathit.account.validator.UserValidator;
 import java.util.List;
 import java.util.UUID;
 
+import io.prometheus.client.Counter;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +28,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**{@author waheedk}*/
 @Controller
 public class UserController {
+    // Define a counter metric for tracking the number of requests
+    private static final Counter requestsTotal = Counter.build()
+            .name("user_requests_total")
+            .help("Total number of user requests.")
+            .register();
     @Autowired
     private UserService userService;
 
@@ -36,6 +48,8 @@ public class UserController {
     /** {@inheritDoc} */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public final String registration(final Model model) {
+        requestsTotal.inc();
+       
         model.addAttribute("userForm", new User());
              	return "registration";
       }
@@ -59,7 +73,8 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public final String login(final Model model, final String error, final String logout) {
         System.out.println("Model data"+model.toString());
-    	if (error != null){
+    	requestsTotal.inc();
+        if (error != null){
             model.addAttribute("error", "Your username and password is invalid.");
         }
         if (logout != null){
