@@ -87,6 +87,11 @@ public class UserController {
     public final String welcome(final Model model) {
         return "welcome";
     }
+    @RequestMapping(value = "/metrics", method = RequestMethod.GET, produces = "text/plain")
+    @ResponseBody
+    public String metrics() {
+        return requestsTotal.describe();
+    }
     /** {@inheritDoc} */
     @RequestMapping(value = { "/index"} , method = RequestMethod.GET)
     public final String indexHome(final Model model) {
