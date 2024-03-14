@@ -2,6 +2,9 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['vproweb:80']  # Name of the service and port where your Nginx server is running
   - job_name: 'java-app'
     static_configs:
       - targets: ['vproapp:8080']  # Name of the service and port where your Java application is running
