@@ -4,4 +4,4 @@ global:
 scrape_configs:
   - job_name: 'java-app'
     static_configs:
-      - targets: ['vproapp:8081']  # Name of the service and port where your Java application is running
+      - targets: ['vproapp:8080']  # Name of the service and port where your Java application is running
